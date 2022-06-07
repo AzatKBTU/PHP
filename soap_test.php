@@ -1,0 +1,38 @@
+<?
+	$_SERVER["DOCUMENT_ROOT"] = "/home/bitrix/www";
+	$DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
+
+	define("NO_KEEP_STATISTIC", true);
+	define("NOT_CHECK_PERMISSIONS", true);
+	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+	set_time_limit(0); 
+
+	global $USER;
+	global $DB;
+
+$xml = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' 
+ xmlns:stat='http://statements.webservices.onlinebank.kz/'>
+ <soapenv:Header/>
+ <soapenv:Body>
+ <stat:getStatementsList>
+<certificate>MIIFlDCCA3ygAwIBAgIQHKwKOF1egJuXR5VMJ6ZtCzANBgkqhkiG9w0BAQUFADBMMQswCQYDVQQGEwJLWjEYMBYGA1UECgwPS2F6a29tbWVydHNiYW5rMSMwIQYDVQQDDBpLYXprb21tZXJ0c2JhbmsgSXNzdWluZyBDQTAeFw0xMzAyMTgxMDQ1NTJaFw0xNzAyMTgxMDQ1NTJaMGIxCzAJBgNVBAYTAktaMR8wHQYJKoZIhvcNAQkBFhBkcnliYWxraW5Aa2tiLmt6MRgwFgYDVQQKDA9LYXprb21tZXJ0c2JhbmsxGDAWBgNVBAMMD1RFU1QgT05MSU5FQkFOSzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA0+ILhHvMUs2+1qSauBWe3W7G69eFTkK7zofiujJyYvpdDLtTo7fESc3WxgweBBTCvjOUx6Yt8+PFr3J2WJBgso0Cc8LT68zG97kqufGvb2KaubiBEbNLWb19mchLvidb3FH+aVEt12Rdd/im+JUbqCb5ND1pW7IOnMWq2MEfK2ECAwEAAaOCAd4wggHaMD0GA1UdJQQ2MDQGCisGAQQBgjcUAgIGCCsGAQUFBwMFBggrBgEFBQcDBwYIKwYBBQUHAwIGCCsGAQUFBwMEMB8GA1UdIwQYMBaAFByIpPblur4VO8vn5jZvSDEByF+uMIGOBgNVHR8EgYYwgYMwQ6BBoD+GPWh0dHA6Ly93d3cua2tiLmt6L2NlcnRyb290L0themtvbW1lcnRzYmFuayUyMElzc3VpbmclMjBDQS5jcmwwPKA6oDiGNmh0dHA6Ly9jZXJ0MS5ra2Iua3ovS2F6a29tbWVydHNiYW5rJTIwSXNzdWluZyUyMENBLmNybDCBmgYDVR0uBIGSMIGPMEmgR6BFhkNodHRwOi8vd3d3LmtrYi5rei9jZXJ0cm9vdC9LYXprb21tZXJ0c2JhbmslMjBJc3N1aW5nJTIwQ0FfZGVsdGEuY3JsMEKgQKA+hjxodHRwOi8vY2VydDEua2tiLmt6L0themtvbW1lcnRzYmFuayUyMElzc3VpbmclMjBDQV9kZWx0YS5jcmwwDgYDVR0PAQH/BAQDAgP4MBsGA1UdEQQUMBKBEGRyeWJhbGtpbkBra2Iua3owHQYDVR0OBBYEFBxy5nUZbVpINRTaW3FqmzGV+cd+MA0GCSqGSIb3DQEBBQUAA4ICAQCNimLetmu/+wrs1Q5RHzPSjE7YuFofO7iOUFuKhGPwHpMfHIJfgGacnFvqmywW1qWZb47EYnmvZ33mXLnVJYgpEFjsMG3L/weedK4xFLIR77bXMpI27dwR3jpflN9Evv2/mBLWCD1mEY8tDKFawFL6t2RO7UgVgQ6P9u4psSsf6qTtW3ULNJNjrrBqxlcRjvh8KRVRDdsjhfcUQ6y6qJcVsC3S+jqIM0q93nrKqR906XRgF3RypXXDXVZgZGDHrtmIDrjuZEdwwldvXsuPYn1jJwx1JDA42AEXIedKNE9pUYIy3zSech0WMKg/AocJYhEnHtlAIIq/XzpsCdFuSf4TV7J1N5G6DAkpKnnXh0Fc5fwZmeb/90CgI+EVOHKaU5RHqNWXSBYhnEnHghxNMn76Hq4bS0Bwro9YgpV1nGanYBoXPbjPVLJD+E/qtsPHdo6Yf5VK85nUTBKaN0SrBgSz1t93K4px7YBYxeIkPWuY9WbxNq38Cf2Jw/jYolbfvTZMd7bmAZAD2QnknMA18nj6+91UrTXDf5+5lovDl6Reo4u1ilBEUvsoEO55kTkDPu15Cw7Cy6s/Qy+S8Ai1/928Q1LVw8NV6POG/xQJYobEbOXkibofWi0PAEdyPi//kecRe8EHbQDgrBQvSffPtUjbx1pvg7WNtb9IpkZIRCWLeQ==</certificate>
+<xmlBody>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48Y29udHJhY3RTdGF0ZW1lbnRzUmVxdWVzdD4JPGRhdGUtYmVnaW4+MjAxNi0wNC0wNlQwMDowMDowMCswNjowMDwvZGF0ZS1iZWdpbj4JPGRhdGUtZW5kPjIwMjEtMDQtMDZUMjM6NTk6NTkrMDY6MDA8L2RhdGUtZW5kPgk8YWNjb3VudC1pYmFuPktaOTc2MDE3MTMxMDAwMDAwMzcyPC9hY2NvdW50LWliYW4+PC9jb250cmFjdFN0YXRlbWVudHNSZXF1ZXN0Pg==</xmlBody>
+<signature>0WyjBTMh+gq5j8I2IpfpiccwZ+fNn+ydgp0x9zpniyhcO5duHWns4ZEeGIvp+kcnGme7TDAgVmKQgYg5UldkpmIarudjWnx1YBAURJg2mMfbdcnYG3NOnBtE6z27pV+ZQidpvCmnKHduVAyrz4EtjpkCsvBs2CoAfPTGJf5jzTY=</signature>
+ </stat:getStatementsList>
+ </soapenv:Body>
+</soapenv:Envelope>
+         ";
+
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL,"https://halyk.onlinebank.kz/ws/StatementsWebService?wsdl");
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($xml));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+$server_output = curl_exec($ch);
+var_dump($server_output);
+var_dump(curl_error($ch));
+curl_close($ch);
+
